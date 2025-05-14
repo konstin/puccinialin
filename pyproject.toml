@@ -1,6 +1,6 @@
 [project]
 name = "puccinialin"
-version = "0.1.3"
+version = "0.1.4"
 description = "Install rust into a temporary directory for boostrapping a rust-based build backend"
 readme = "README.md"
 authors = [
