@@ -17,7 +17,7 @@ jobs:
           - macos-13
           # Windows x86_64
           - windows-latest
-        python_version: ["3.9", "3.13"]
+        python_version: ["3.9", "3.13", "graalpy@3.11"]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4

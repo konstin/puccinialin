@@ -66,21 +66,25 @@ def get_triple(file: typing.IO) -> str:
         print(f"Python reports platform: {sysconfig_platform}", file=file)
 
     # Linux
-    if "-linux-" in sysconfig_platform:
+    if "-linux" in sysconfig_platform:
         try:
             arch, linux, libc = sysconfig_platform.split("-")
         except ValueError:
             print(f"Unrecognized linux platform {sysconfig_platform}", file=file)
             sys.exit(1)
-        if not linux == "linux":
+        if (
+            linux in ("x86_64", "amd64", "aarch64", "arm64") and libc == "linux"
+        ):  # GraalPy has e.g. native-x86_64-linux
+            arch, linux, libc = linux, libc, "gnu"
+        elif not linux == "linux":
             print(f"Unrecognized linux platform {sysconfig_platform}", file=file)
             sys.exit(1)
         target = f"{arch}-unknown-{linux}-{libc}"
     # macOS (both Intel and arm)
-    elif sysconfig_platform == "darwin":
+    elif "darwin" in sysconfig_platform:
         # Check machine architecture to determine the correct target
         machine = platform.machine()
-        if machine == "arm64":
+        if machine in ("arm64", "aarch64"):
             target = "aarch64-apple-darwin"
         elif machine == "x86_64":
             target = "x86_64-apple-darwin"
@@ -88,6 +92,9 @@ def get_triple(file: typing.IO) -> str:
             raise ValueError(f"Unknown macOS machine: {machine}")
     # Windows x86_64
     elif sysconfig_platform in ["win-amd64", "win_amd64"]:
+        target = "x86_64-pc-windows-msvc"
+    # Windows x86_64 on GraalPy
+    elif sysconfig_platform == "native-x86_64-win32":
         target = "x86_64-pc-windows-msvc"
     # Windows x86
     elif sysconfig_platform == "win32":
