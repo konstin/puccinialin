@@ -1,6 +1,6 @@
 [project]
 name = "puccinialin"
-version = "0.1.4"
+version = "0.1.5"
 description = "Install rust into a temporary directory for boostrapping a rust-based build backend"
 readme = "README.md"
 authors = [
@@ -12,6 +12,8 @@ dependencies = [
     "platformdirs>=4.3.6,<5",
     "tqdm>=4.67.1,<5",
 ]
+license = "MIT OR Apache-2.0"
+license-files = ["license-mit", "license-apache"]
 
 [project.scripts]
 puccinialize = "puccinialin.__main__:main"
@@ -22,6 +24,9 @@ repository = "https://github.com/konstin/puccinialin"
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.sdist]
+include = ["src/"]
 
 [tool.ruff]
 line-length = 88
