@@ -18,11 +18,11 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
       - uses: astral-sh/setup-uv@v3
-      - run: uv build
+      - run: uv build --preview
       - name: Smoke Test
         run: |
           uv venv -p 3.9
-          uv pip install dist/*.whl
+          uv pip install puccinialin --find-links ./dist/
           uv run python -m puccinialin --help
           .venv/bin/puccinialize
       - run: uv publish
