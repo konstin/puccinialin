@@ -131,5 +131,5 @@ def setup_rust(
     }
 
     print("Checking if cargo is installed", file=file)
-    check_call(["cargo", "--version"], env={**os.environ, **extra_env})
+    check_call("cargo --version", env={**os.environ, **extra_env}, shell=True)
     return extra_env
