@@ -3,6 +3,7 @@
 ## v0.1.7
 
 - Switch to flit to avoid bootstrapping loop
+- Fix Windows by using an absolute target path when checking for cargo
 
 ## v0.1.6
 
