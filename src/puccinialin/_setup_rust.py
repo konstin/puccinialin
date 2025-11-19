@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import shutil
 import stat
 import subprocess
 import sys
@@ -138,5 +139,8 @@ def setup_rust(
     }
 
     print("Checking if cargo is installed", file=file)
-    check_call(["cargo", "--version"], env={**os.environ, **extra_env})
+    cargo = shutil.which("cargo", path=new_path)
+    if not cargo:
+        raise RuntimeError(f"`cargo` not found in {cargo_home.joinpath('bin')}")
+    check_call([cargo, "--version"], env={**os.environ, **extra_env})
     return extra_env
