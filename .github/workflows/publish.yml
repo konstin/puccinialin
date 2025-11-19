@@ -48,7 +48,7 @@ jobs:
           uv pip install puccinialin --find-links ./dist/
           uv run python -m puccinialin --help
           .venv/bin/puccinialize
-      - run: uv publish
+      - run: uv publish --check-url https://pypi.org/simple/
       - name: Create release
         run: gh release create ${{ inputs.version }}
         env:
