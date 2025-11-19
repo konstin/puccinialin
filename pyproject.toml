@@ -1,6 +1,6 @@
 [project]
 name = "puccinialin"
-version = "0.1.5"
+version = "0.1.6"
 description = "Install rust into a temporary directory for boostrapping a rust-based build backend"
 readme = "README.md"
 authors = [
@@ -8,6 +8,7 @@ authors = [
 ]
 requires-python = ">=3.9"
 dependencies = [
+    "filelock>=3.19.1,<4.0.0",
     "httpx>=0.28.1,<0.29",
     "platformdirs>=4.3.6,<5",
     "tqdm>=4.67.1,<5",
