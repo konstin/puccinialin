@@ -50,6 +50,6 @@ jobs:
           .venv/bin/puccinialize
       - run: uv publish --check-url https://pypi.org/simple/
       - name: Create release
-        run: gh release create ${{ inputs.version }}
+        run: gh release create ${{ inputs.version }} --title ${{ inputs.version }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
