@@ -8,6 +8,8 @@ import typing
 from pathlib import Path
 from subprocess import check_call
 
+from filelock import FileLock
+
 from puccinialin._target import Target, get_triple
 
 
@@ -120,7 +122,12 @@ def setup_rust(
     else:
         rustup_init = download_rustup(url, rustup_init, target, file)
     # Step 3: Install rust and cargo
-    install_rust(rustup_init, rustup_home, cargo_home, file)
+
+    # Only one rustup at a time, rustup isn't parallelism save.
+    # https://github.com/rust-lang/rustup/issues/4607
+    lock = FileLock(rustup_init.with_suffix(".lock"))
+    with lock:
+        install_rust(rustup_init, rustup_home, cargo_home, file)
 
     # Step 4: Construct and return a dict of changed environment variables to use this rust installation
     new_path = f"{cargo_home.joinpath('bin')}{target.env_path_separator()}{os.environ.get('PATH')}"
