@@ -1,6 +1,6 @@
 [project]
 name = "puccinialin"
-version = "0.1.6"
+version = "0.1.7"
 description = "Install rust into a temporary directory for boostrapping a rust-based build backend"
 readme = "README.md"
 authors = [
@@ -23,8 +23,8 @@ puccinialize = "puccinialin.__main__:main"
 repository = "https://github.com/konstin/puccinialin"
 
 [build-system]
-requires = ["uv_build>=0.7.12,<0.8.0"]
-build-backend = "uv_build"
+requires = ["flit_core>=3.2,<4"]
+build-backend = "flit_core.buildapi"
 
 [tool.ruff]
 line-length = 88
