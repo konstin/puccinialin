@@ -14,14 +14,13 @@ jobs:
       url: https://pypi.org/p/puccinialin
     permissions:
       id-token: write # For trusted publishing
-      contents: write # To push the git tag
+      contents: write # To create the release including the tag
 
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 0
-      - uses: astral-sh/setup-uv@v3
       - name: Verify version matches pyproject.toml
         run: |
           PYPROJECT_VERSION=$(grep '^version = ' pyproject.toml | sed 's/version = "\(.*\)"/\1/')
@@ -41,6 +40,7 @@ jobs:
             exit 1
           fi
           echo "Tag check passed: ${{ inputs.version }} does not exist yet"
+      - uses: astral-sh/setup-uv@v3
       - run: uv build --preview
       - name: Smoke Test
         run: |
@@ -49,9 +49,7 @@ jobs:
           uv run python -m puccinialin --help
           .venv/bin/puccinialize
       - run: uv publish
-      - name: Create and push git tag
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git tag ${{ inputs.version }}
-          git push origin ${{ inputs.version }}
+      - name: Create release
+        run: gh release create ${{ inputs.version }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
