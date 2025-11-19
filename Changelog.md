@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.1.8
+
+- Fixed the release process, no code changes
+
 ## v0.1.7
 
 - Switch to flit to avoid bootstrapping loop
