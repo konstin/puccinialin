@@ -45,4 +45,4 @@ jobs:
         run: npx prettier --check --print-width 120 --prose-wrap always .github/** src/** *.md
       - uses: astral-sh/setup-uv@v5
       - name: Type Check
-        run: uv run pyright
+        run: uv run ty check

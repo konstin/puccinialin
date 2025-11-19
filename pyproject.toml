@@ -33,5 +33,5 @@ extend-select = ["B", "I"]
 
 [dependency-groups]
 dev = [
-    "pyright>=1.1.391",
+    "ty>=0.0.1a27",
 ]
