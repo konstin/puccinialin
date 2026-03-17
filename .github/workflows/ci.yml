@@ -36,11 +36,11 @@ jobs:
         with:
           persist-credentials: false
       - name: Ruff lint
-        uses: astral-sh/ruff-action@f2e32211077f40bfeab40e16285216924ebea4cb # v2.0.0
+        uses: astral-sh/ruff-action@4919ec5cf1f49eff0871dbcea0da843445b837e6 # v3.6.1
         with:
           args: "check"
       - name: Ruff format
-        uses: astral-sh/ruff-action@f2e32211077f40bfeab40e16285216924ebea4cb # v2.0.0
+        uses: astral-sh/ruff-action@4919ec5cf1f49eff0871dbcea0da843445b837e6 # v3.6.1
         with:
           args: "format --check"
       - name: Prettier
