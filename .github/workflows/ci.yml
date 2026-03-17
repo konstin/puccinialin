@@ -13,8 +13,6 @@ jobs:
           - ubuntu-latest
           # Mac aarch64
           - macos-latest
-          # Mac x86_64
-          - macos-13
           # Windows x86_64
           - windows-latest
         python_version: ["3.9", "3.14", "graalpy@3.12"]
