@@ -90,7 +90,7 @@ def setup_rust(
     program: str | None = None,
     file: typing.IO = sys.stderr,
 ) -> dict[str, str]:
-    """Install rust and return the modified environment variable to use it.
+    """Install rust and return the modified environment variables to use it.
 
     If `installation_dir` is given, this directory is used. By default, the cache directory for `program` is used.
 
