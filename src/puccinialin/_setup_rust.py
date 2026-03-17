@@ -111,7 +111,7 @@ def setup_rust(
     rustup_home = installation_dir.joinpath("rustup")
     rustup_home.mkdir(parents=True, exist_ok=True)
     cargo_home = installation_dir.joinpath("cargo")
-    rustup_home.mkdir(parents=True, exist_ok=True)
+    cargo_home.mkdir(parents=True, exist_ok=True)
 
     # Step 2: Download rustup
     rustup_init = rustup_init_dir.joinpath("rustup-init").with_suffix(
