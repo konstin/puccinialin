@@ -40,7 +40,7 @@ jobs:
             exit 1
           fi
           echo "Tag check passed: ${{ inputs.version }} does not exist yet"
-      - uses: astral-sh/setup-uv@caf0cab7a618c569241d31dcd442f54681755d39 # v3.2.4
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.6.0
       - run: uv build --preview
       - name: Smoke Test
         run: |
