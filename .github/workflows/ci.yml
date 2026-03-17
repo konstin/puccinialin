@@ -18,6 +18,10 @@ jobs:
           # Windows x86_64
           - windows-latest
         python_version: ["3.9", "3.14", "graalpy@3.12"]
+        exclude:
+          # GraalPy's ctypes on Windows doesn't support the calls filelock uses
+          - os: windows-latest
+            python_version: "graalpy@3.12"
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
