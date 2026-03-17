@@ -17,7 +17,7 @@ jobs:
       contents: write # To create the release including the tag
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -40,7 +40,7 @@ jobs:
             exit 1
           fi
           echo "Tag check passed: ${{ inputs.version }} does not exist yet"
-      - uses: astral-sh/setup-uv@v3
+      - uses: astral-sh/setup-uv@caf0cab7a618c569241d31dcd442f54681755d39 # v3.2.4
       - run: uv build --preview
       - name: Smoke Test
         run: |
