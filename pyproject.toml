@@ -34,5 +34,5 @@ extend-select = ["B", "I"]
 
 [dependency-groups]
 dev = [
-    "ty>=0.0.1a27",
+    "ty>=0.0.23",
 ]
