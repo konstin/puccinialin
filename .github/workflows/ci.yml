@@ -22,29 +22,29 @@ jobs:
             python_version: "graalpy@3.12"
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
           persist-credentials: false
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5.4.2
       - name: Bootstrap Rust
         run: uv run -p ${{ matrix.python_version }} python -m puccinialin
 
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
           persist-credentials: false
       - name: Ruff lint
-        uses: astral-sh/ruff-action@v2
+        uses: astral-sh/ruff-action@f2e32211077f40bfeab40e16285216924ebea4cb # v2.0.0
         with:
           args: "check"
       - name: Ruff format
-        uses: astral-sh/ruff-action@v2
+        uses: astral-sh/ruff-action@f2e32211077f40bfeab40e16285216924ebea4cb # v2.0.0
         with:
           args: "format --check"
       - name: Prettier
         run: npx prettier --check --print-width 120 --prose-wrap always .github/** src/** *.md
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5.4.2
       - name: Type Check
         run: uv run ty check
