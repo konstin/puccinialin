@@ -3,6 +3,7 @@
 ## 0.1.10
 
 - Fix `RUST_HOME` -> `RUSTUP_HOME` (rustup ignores `RUST_HOME`)
+- Fix Windows ARM64 support ([#33](https://github.com/konstin/puccinialin/pull/33))
 
 ## 0.1.9
 
