@@ -99,6 +99,8 @@ def get_triple(file: typing.IO) -> str:
     # Windows x86
     elif sysconfig_platform == "win32":
         target = "i686-pc-windows-msvc"
+    elif sysconfig_platform in ["win_arm64", "win-arm64"]:
+        target = "aarch64-pc-windows-msvc"
     else:
         print(f"Unsupported platform: {sysconfig_platform}", file=file)
         sys.exit(1)
