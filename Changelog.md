@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.10
+
+- Fix `RUST_HOME` -> `RUSTUP_HOME` (rustup ignores `RUST_HOME`)
+
 ## 0.1.9
 
 - Fix creation of cargo home

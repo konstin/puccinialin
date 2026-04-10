@@ -76,7 +76,7 @@ def install_rust(
         ],
         env={
             **os.environ,
-            "RUST_HOME": str(rustup_home),
+            "RUSTUP_HOME": str(rustup_home),
             "CARGO_HOME": str(cargo_home),
         },
         # Hide the "Rust is now installed" message.
@@ -133,7 +133,7 @@ def setup_rust(
     # Step 4: Construct and return a dict of changed environment variables to use this rust installation
     new_path = f"{cargo_home.joinpath('bin')}{target.env_path_separator()}{os.environ.get('PATH')}"
     extra_env: dict[str, str] = {
-        "RUST_HOME": str(rustup_home),
+        "RUSTUP_HOME": str(rustup_home),
         "CARGO_HOME": str(cargo_home),
         "PATH": new_path,
     }
