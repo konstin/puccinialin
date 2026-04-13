@@ -62,7 +62,11 @@ def download_rustup(
 
 
 def install_rust(
-    rustup_init: Path, rustup_home: Path, cargo_home: Path, file: typing.IO
+    rustup_init: Path,
+    rustup_home: Path,
+    cargo_home: Path,
+    file: typing.IO,
+    target_triple: str,
 ):
     """Run rustup to install rust and cargo"""
     print(f"Installing rust to {rustup_home}", file=file)
@@ -73,6 +77,8 @@ def install_rust(
             "--no-modify-path",
             "--profile",
             "minimal",
+            "--default-host",
+            target_triple,
         ],
         env={
             **os.environ,
@@ -128,7 +134,7 @@ def setup_rust(
     # https://github.com/rust-lang/rustup/issues/4607
     lock = FileLock(rustup_init.with_suffix(".lock"))
     with lock:
-        install_rust(rustup_init, rustup_home, cargo_home, file)
+        install_rust(rustup_init, rustup_home, cargo_home, file, target_triple)
 
     # Step 4: Construct and return a dict of changed environment variables to use this rust installation
     new_path = f"{cargo_home.joinpath('bin')}{target.env_path_separator()}{os.environ.get('PATH')}"
