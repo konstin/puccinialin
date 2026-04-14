@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.11
+
+- Install Rust with an explicit target triple ([#36](https://github.com/konstin/puccinialin/pull/36))
+
 ## 0.1.10
 
 - Fix `RUST_HOME` -> `RUSTUP_HOME` (rustup ignores `RUST_HOME`)
