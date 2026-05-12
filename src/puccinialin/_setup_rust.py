@@ -124,16 +124,17 @@ def setup_rust(
         target.exe_suffix()
     )
     url = f"https://static.rust-lang.org/rustup/dist/{target_triple}/rustup-init{target.exe_suffix()}"
-    if rustup_init.is_file():
-        print("Rustup already downloaded", file=file)
-    else:
-        rustup_init = download_rustup(url, rustup_init, target, file)
-    # Step 3: Install rust and cargo
 
-    # Only one rustup at a time, rustup isn't parallelism save.
+    # Lock the download as well as the install: concurrent callers otherwise
+    # each download to their own tmp file and both os.replace the same target,
+    # unlinking the inode another caller is exec-ing.
     # https://github.com/rust-lang/rustup/issues/4607
     lock = FileLock(rustup_init.with_suffix(".lock"))
     with lock:
+        if rustup_init.is_file():
+            print("Rustup already downloaded", file=file)
+        else:
+            rustup_init = download_rustup(url, rustup_init, target, file)
         install_rust(rustup_init, rustup_home, cargo_home, file, target_triple)
 
     # Step 4: Construct and return a dict of changed environment variables to use this rust installation
