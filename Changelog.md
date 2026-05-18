@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.12
+
+- Fix race condition in rustup-init downloads during concurrent setup
+  ([#38](https://github.com/konstin/puccinialin/pull/38))
+
 ## 0.1.11
 
 - Install Rust with an explicit target triple ([#36](https://github.com/konstin/puccinialin/pull/36))
