@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.13
+
+- Fix platform detection for 32-bit Linux by mapping Python's `i386` architecture to Rust's `i686` target
+  ([#40](https://github.com/konstin/puccinialin/pull/40))
+
 ## 0.1.12
 
 - Fix race condition in rustup-init downloads during concurrent setup
