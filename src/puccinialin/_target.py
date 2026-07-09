@@ -79,6 +79,8 @@ def get_triple(file: typing.IO) -> str:
         elif not linux == "linux":
             print(f"Unrecognized linux platform {sysconfig_platform}", file=file)
             sys.exit(1)
+        if arch == "i386":
+            arch = "i686"
         target = f"{arch}-unknown-{linux}-{libc}"
     # macOS (both Intel and arm)
     elif "darwin" in sysconfig_platform:
