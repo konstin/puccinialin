@@ -54,7 +54,11 @@ def get_triple(file: typing.IO) -> str:
     soabi = sysconfig.get_config_var("SOABI")
     if soabi:
         print(f"Python reports SOABI: {soabi}", file=file)
-        if soabi.count("-") == 1:
+        if soabi.startswith("pypy"):
+            sysconfig_platform = (
+                sysconfig.get_config_var("MULTIARCH") or sysconfig.get_platform()
+            )
+        elif soabi.count("-") == 1:
             _python, sysconfig_platform = soabi.split("-", maxsplit=2)
         else:
             _python_interpreter, _python_version, sysconfig_platform = soabi.split(
