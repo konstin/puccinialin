@@ -52,7 +52,17 @@ def get_triple(file: typing.IO) -> str:
     shared library of native modules, which should match the binaries that we build on the rust side. For other
     platforms, we may need to query additional fields."""
     soabi = sysconfig.get_config_var("SOABI")
-    if soabi:
+    if soabi and soabi.startswith("pypy"):
+        # PyPy's SOABI only identifies the interpreter ABI (e.g. pypy311-pp73),
+        # while MULTIARCH contains the platform information we need.
+        print(f"Python reports SOABI: {soabi}", file=file)
+        sysconfig_platform = sysconfig.get_config_var("MULTIARCH")
+        if sysconfig_platform:
+            print(f"Python reports multiarch: {sysconfig_platform}", file=file)
+        else:
+            sysconfig_platform = sysconfig.get_platform()
+            print(f"Python reports platform: {sysconfig_platform}", file=file)
+    elif soabi:
         print(f"Python reports SOABI: {soabi}", file=file)
         if soabi.count("-") == 1:
             _python, sysconfig_platform = soabi.split("-", maxsplit=2)

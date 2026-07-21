@@ -15,7 +15,7 @@ jobs:
           - macos-latest
           # Windows x86_64
           - windows-latest
-        python_version: ["3.9", "3.14", "graalpy@3.12"]
+        python_version: ["3.9", "3.14", "pypy@3.11", "graalpy@3.12"]
         exclude:
           # GraalPy's ctypes on Windows doesn't support the calls filelock uses
           - os: windows-latest
