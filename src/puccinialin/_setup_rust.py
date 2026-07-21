@@ -8,7 +8,6 @@ import sys
 import typing
 from pathlib import Path
 from subprocess import check_call
-from urllib.parse import urljoin
 
 from filelock import FileLock
 
@@ -124,9 +123,12 @@ def setup_rust(
     rustup_init = rustup_init_dir.joinpath("rustup-init").with_suffix(
         target.exe_suffix()
     )
-    url = urljoin(
-        os.environ.get("RUSTUP_UPDATE_ROOT", "https://static.rust-lang.org"),
-        f"rustup/dist/{target_triple}/rustup-init{target.exe_suffix()}",
+    rustup_update_root = (
+        os.environ.get("RUSTUP_UPDATE_ROOT") or "https://static.rust-lang.org/rustup"
+    )
+    url = (
+        f"{rustup_update_root.rstrip('/')}/dist/{target_triple}/"
+        f"rustup-init{target.exe_suffix()}"
     )
 
     # Lock the download as well as the install: concurrent callers otherwise
