@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.14
+
+- Respect `RUSTUP_UPDATE_ROOT` when downloading rustup-init ([#44](https://github.com/konstin/puccinialin/pull/44))
+- Support PyPy platform detection ([#45](https://github.com/konstin/puccinialin/pull/45))
+
 ## 0.1.13
 
 - Fix platform detection for 32-bit Linux by mapping Python's `i386` architecture to Rust's `i686` target
