@@ -26,14 +26,8 @@ repository = "https://github.com/konstin/puccinialin"
 requires = ["flit_core>=3.2,<4"]
 build-backend = "flit_core.buildapi"
 
-[tool.ruff]
-line-length = 88
-
-[tool.ruff.lint]
-extend-select = ["B", "I"]
-
 [dependency-groups]
 dev = [
-    "ruff>=0.15.6,<0.16.0",
-    "ty>=0.0.23,<1.0.0",
+    "ruff>=0.16.0,<0.17.0",
+    "ty>=0.0.64,<1.0.0",
 ]
