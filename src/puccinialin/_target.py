@@ -86,7 +86,7 @@ def get_triple(file: typing.IO) -> str:
             linux in ("x86_64", "amd64", "aarch64", "arm64") and libc == "linux"
         ):  # GraalPy has e.g. native-x86_64-linux
             arch, linux, libc = linux, libc, "gnu"
-        elif not linux == "linux":
+        elif linux != "linux":
             print(f"Unrecognized linux platform {sysconfig_platform}", file=file)
             sys.exit(1)
         if arch == "i386":
@@ -102,11 +102,8 @@ def get_triple(file: typing.IO) -> str:
             target = "x86_64-apple-darwin"
         else:
             raise ValueError(f"Unknown macOS machine: {machine}")
-    # Windows x86_64
-    elif sysconfig_platform in ["win-amd64", "win_amd64"]:
-        target = "x86_64-pc-windows-msvc"
-    # Windows x86_64 on GraalPy
-    elif sysconfig_platform == "native-x86_64-win32":
+    # Windows x86_64, including GraalPy
+    elif sysconfig_platform in ["win-amd64", "win_amd64", "native-x86_64-win32"]:
         target = "x86_64-pc-windows-msvc"
     # Windows x86
     elif sysconfig_platform == "win32":
